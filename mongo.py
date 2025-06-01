@@ -3,13 +3,13 @@ from pymongo import MongoClient
 
 # Conexión a MongoDB
 client = MongoClient("mongodb://localhost:27017/")
-db = client["mi_base_datos"]
+db = client["futbol_db"]
 coleccion = db["datos_excel"]
 
 # Función para cargar datos desde un archivo Excel
 def cargar_excel_a_mongo(ruta_archivo, anio):
     df = pd.read_excel(ruta_archivo)
-    df["anio"] = anio  # Agregamos el año como campo adicional
+    df["anio"] = anio  
     datos = df.to_dict(orient="records")
     coleccion.insert_many(datos)
     print(f"Datos de {anio} insertados correctamente.")
